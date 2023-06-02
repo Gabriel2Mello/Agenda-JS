@@ -1,4 +1,5 @@
 // npm start
+// npm run dev
 require('dotenv').config();
 const express = require('express');
 const app = express();
