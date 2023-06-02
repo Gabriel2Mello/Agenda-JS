@@ -27,13 +27,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, 'public')));
 
+const maxAgeInDays = (days) => 1000 * 60 * 60 * 24 * days;
 const sessionOptions = session({
-    secret: 'Q69::KOh@N.^NU#Q`!6!QBQNSGMZ(2',
+    secret: process.env.SESSION_SECRET,
     store: MongoScore.create({ mongoUrl: process.env.CONNECTION_STRING }),
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        maxAge: maxAgeInDays(7),
         httpOnly: true
     }
 });
