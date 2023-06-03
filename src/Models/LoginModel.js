@@ -20,27 +20,51 @@ class Login {
         return this.errors.length > 0
     };
 
+    async login() {        
+        this.checkFields();
+        if(this.hasError) return;
+
+        await this.emailExistsLogin();
+        if(this.hasError) return;
+        
+        this.comparePassword();
+        if(this.hasError) return;
+    }
+
+    async emailExistsLogin() {
+        await this.findEmail();
+        if(!this.user) this.errors.push(`Email doesn't exist.`);
+    }
+
+    comparePassword() {
+        const isEqual = bcryptjs.compareSync(this.body.password, this.user.password);
+        if(isEqual) return isEqual;
+        this.errors.push('Password invalid.');
+        this.user = null;
+        return;
+    }
+
     async register() {
         this.checkFields();
         if(this.hasError) return;
 
-        await this.emailExists();
+        await this.emailExistsRegister();
         if(this.hasError) return;
 
-        this.body.password = generateHash(this.body.password);
-        try {            
-            this.user = await LoginModel.create(this.body);
-        } catch (e) {
-            console.log(e);
-        }
+        this.body.password = generateHash(this.body.password);        
+        this.user = await LoginModel.create(this.body);
     }
 
-    async emailExists() {
-        const user = await LoginModel.findOne({ email: this.body.email });
-        if(user) this.errors.push('Email already exists.');
+    async emailExistsRegister() {  
+        await this.findEmail();
+        if(this.user) this.errors.push('Email already exists.');
     }
 
-    checkFields() {
+    async findEmail() {
+        this.user = await LoginModel.findOne({ email: this.body.email });
+    }
+
+    checkFields() {        
         this.cleanUp();
         
         if(!validator.isEmail(this.body.email)) {
