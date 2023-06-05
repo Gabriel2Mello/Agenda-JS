@@ -26,12 +26,33 @@ exports.register = async (req, res) => {
     }
 };
 
-exports.edit = async (req, res) => {
+exports.contact = async (req, res) => {
     if(!req.params.id) return res.render('404');
     
-    const contact = await Contact.findById(req.params.id);
-    
+    const contact = await Contact.findById(req.params.id);    
     if(!contact) return res.render('404');
 
     res.render('contact', { contact });
+};
+
+exports.update = async (req, res) => {
+    try {
+        if(!req.params.id) return res.render('404');
+
+        const contact = new Contact(req.body);
+        await contact.update(req.params.id);
+    
+        if(contact.hasError) {
+            req.flash('errors', contact.errors);
+            req.session.save(() => res.redirect(`/contact/${req.params.id}`));
+            return;
+        }
+    
+        req.flash('success', 'Contact updated with success!');
+        req.session.save(() => res.redirect(`/contact/${contact.contact._id}`));
+        return;
+    } catch (e) {
+        console.log(e);
+        return res.render('404');
+    }
 };
