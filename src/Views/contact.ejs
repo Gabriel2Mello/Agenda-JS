@@ -14,27 +14,27 @@
 
 
             <form action="/contact/register" method="POST">
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email"
-                        aria-describedby="emailHelp" placeholder="Ex.: name@gmail.com">
-                </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">        
 
                 <div class="form-group">
                     <label for="nome">Name</label>
-                    <input type="text" class="form-control" name="name">
+                    <input value="<%= contact.name %>" type="text" class="form-control" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="last-name">Last name</label>
-                    <input type="text" class="form-control" name="lastName">
+                    <input value="<%= contact.lastName %>" type="text" class="form-control" name="lastName">
                 </div>
 
                 <div class="form-group">
                     <label for="number">Number</label>
-                    <input type="tel" class="form-control" name="number" placeholder="Ex.: (11) 1111-1111">
+                    <input value="<%= contact.number %>" type="tel" class="form-control" name="number" placeholder="Ex.: (11) 1111-1111">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input value="<%= contact.email %>" type="email" class="form-control" id="email" name="email"
+                        aria-describedby="emailHelp" placeholder="Ex.: name@gmail.com">
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Save</button>

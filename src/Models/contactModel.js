@@ -23,6 +23,13 @@ Contact.prototype = {
     }
 }
 
+Contact.findById = async function(id) {
+    if(typeof(id) !== 'string') return;
+
+    const user = await ContactModel.findById(id);
+    return user;
+}
+
 Contact.prototype.register = async function() {
     this.checkFields();
     if(this.hasError) return;
@@ -41,7 +48,6 @@ Contact.prototype.checkFields = function () {
         this.errors.push('Contact needs a number or an email.');
     }
 }
-
 
 Contact.prototype.cleanUp = function () {
     for (const key in this.body) {            
