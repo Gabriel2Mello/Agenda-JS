@@ -22,5 +22,6 @@ route.get('/contact', loginRequired, contactController.index);
 route.post('/contact/register', loginRequired, contactController.register);
 route.get('/contact/:id', loginRequired, contactController.contact);
 route.post('/contact/edit/:id', loginRequired, contactController.update);
+route.get('/contact/delete/:id', loginRequired, contactController.delete);
 
 module.exports = route;
