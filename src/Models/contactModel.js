@@ -5,7 +5,7 @@ const contactSchema = new mongoose.Schema({
     email: { type: String, default: '' },
     name: { type: String, required: true},
     lastName: { type: String, default: '' },
-    number: { type: String, default: '' },
+    phone: { type: String, default: '' },
     createdAt: { type: Date, default: Date.now }
 });
 
@@ -37,8 +37,8 @@ Contact.prototype.checkFields = function () {
 
     if(!this.body.name) this.errors.push('Name is required.');
 
-    if(!this.body.email && !this.body.number) {
-        this.errors.push('Contact needs a number or an email.');
+    if(!this.body.email && !this.body.phone) {
+        this.errors.push('Contact needs a phone or an email.');
     }
 }
 
@@ -53,7 +53,7 @@ Contact.prototype.cleanUp = function () {
         email: this.body.email,
         name: this.body.name,
         lastName: this.body.lastName,
-        number: this.body.number
+        phone: this.body.phone
     };
 }
 

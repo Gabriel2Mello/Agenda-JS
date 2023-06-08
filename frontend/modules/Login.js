@@ -4,11 +4,7 @@ export default function Login(formClass) {
     this.form = document.querySelector(formClass);
 }
 
-Login.prototype.console = function() {
-    console.log(this.form);
-}
-
-Login.prototype.init = function() {    
+Login.prototype.init = function() {
     this.events();
 }
 

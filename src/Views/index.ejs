@@ -19,10 +19,10 @@
                             <tr>
                                 <td><%= contact.name %></td>
                                 <td><%= contact.lastName %></td>
-                                <td><%= contact.number %></td>
+                                <td><%= contact.phone %></td>
                                 <td><%= contact.email %></td>
-                                <td><a href="/contact/<%= contact._id %>">Edit</a></td>
-                                <td><a class="text-danger" href="/contact/delete/<%= contact._id %>">Delete</a></td>
+                                <td><a style="text-decoration: none;" href="/contact/<%= contact._id %>">Edit</a></td>
+                                <td><a style="text-decoration: none;" class="text-danger" href="/contact/delete/<%= contact._id %>">Delete</a></td>
                             </tr>
                         <% }); %>
                     </table>

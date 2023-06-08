@@ -15,34 +15,34 @@
 
             <% if(contact._id) { %>
                 <form action="/contact/edit/<%= contact._id %>" method="POST">
-            <% } else { %>            
+            <% } else { %>
                 <form action="/contact/register" method="POST">
-            <% } %>
-
+            <% } %>                
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">        
 
                 <div class="form-group">
                     <label for="nome">Name</label>
-                    <input value="<%= contact.name %>" type="text" class="form-control" name="name">
+                    <input value="<%= contact.name %>" type="text" class="form-control contact-field" name="name">
                 </div>
 
                 <div class="form-group">
                     <label for="last-name">Last name</label>
-                    <input value="<%= contact.lastName %>" type="text" class="form-control" name="lastName">
+                    <input value="<%= contact.lastName %>" type="text" class="form-control contact-field" name="lastName">
                 </div>
 
                 <div class="form-group">
-                    <label for="number">Number</label>
-                    <input value="<%= contact.number %>" type="tel" class="form-control" name="number" placeholder="Ex.: (11) 1111-1111">
+                    <label for="phone">Phone</label>
+                    <input value="<%= contact.phone %>" type="tel" class="form-control contact-field" name="phone" placeholder="Ex.: (11) 1111-1111">
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input value="<%= contact.email %>" type="email" class="form-control" id="email" name="email"
+                    <input value="<%= contact.email %>" type="email" class="form-control contact-field" id="email" name="email"
                         aria-describedby="emailHelp" placeholder="Ex.: name@gmail.com">
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="margin-top: 15px;">Save</button>
+                <%- include('includes/testFields') %>
             </form>
 
 
