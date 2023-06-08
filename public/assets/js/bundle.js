@@ -33,26 +33,36 @@ Login.prototype.events = function () {
   });
 };
 Login.prototype.validate = function (e) {
-  var el = e.target;
-  var emailInput = el.querySelector('input[name="email"]');
-  var passwordInput = el.querySelector('input[name="password"]');
+  this.clearErrors();
+  var target = e.target;
+  var _target$elements = target.elements,
+    email = _target$elements.email,
+    password = _target$elements.password;
   var hasError = false;
-  if (!validator__WEBPACK_IMPORTED_MODULE_0___default().isEmail(emailInput.value)) {
-    alert('Email invalid.');
+  if (!validator__WEBPACK_IMPORTED_MODULE_0___default().isEmail(email.value)) {
+    this.createError(email, 'Email invalid.');
     hasError = true;
   }
-  if (!isInRange(passwordInput.value)) {
-    alert('Password need to have between 3 and 50 characters.');
+  if (!validator__WEBPACK_IMPORTED_MODULE_0___default().isLength(password.value, {
+    min: 3,
+    max: 50
+  })) {
+    this.createError(password, 'Between 3 and 50 characters.');
     hasError = true;
   }
-  if (!hasError) el.submit();
+  if (!hasError) target.submit();
 };
-function isInRange(value) {
-  var min = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
-  var max = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 50;
-  var length = value.length;
-  return length >= min && length <= max;
-}
+Login.prototype.clearErrors = function () {
+  this.form.querySelectorAll('.alert-danger').forEach(function (el) {
+    return el.remove();
+  });
+};
+Login.prototype.createError = function (field, msg) {
+  var div = document.createElement('div');
+  div.innerHTML = msg;
+  div.classList.add('alert-danger');
+  field.insertAdjacentElement('afterend', div);
+};
 
 /***/ }),
 

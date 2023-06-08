@@ -71,7 +71,7 @@ class Login {
             this.errors.push('Email invalid.');
         };
 
-        if(!isInRange(this.body.password, 3, 50)) {
+        if(!validator.isLength(this.body.password, { min: 3, max: 50 })) {
             this.errors.push('Password need to have between 3 and 50 characters.');
         }
     }
@@ -91,13 +91,8 @@ class Login {
 
 }
 
-function isInRange(value, min, max) {
-    const length = value.length;     
-    return (length >= min && length <= max);
-}
-
 function generateHash(value) {
-    const salt = bcryptjs.genSaltSync();              
+    const salt = bcryptjs.genSaltSync(10);
     return bcryptjs.hashSync(value, salt);
 }
 

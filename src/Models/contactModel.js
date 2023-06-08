@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const contactSchema = new mongoose.Schema({
-    email: { type: String, required: false, default: '' },
+    email: { type: String, default: '' },
     name: { type: String, required: true},
-    lastName: { type: String, required: false, default: '' },
-    number: { type: String, required: false, default: '' },
-    createdAt: { type: Date, required: true, default: Date.now }
+    lastName: { type: String, default: '' },
+    number: { type: String, default: '' },
+    createdAt: { type: Date, default: Date.now }
 });
 
 const ContactModel = mongoose.model('contact', contactSchema);
