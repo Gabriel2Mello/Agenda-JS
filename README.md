@@ -1,4 +1,4 @@
-# Agenda-JS
+# Agenda
 Acabei de concluir um projeto de agenda que integra JavaScript, HTML, CSS e utiliza o MongoDB como banco de dados. 
 Esse projeto prioriza um código funcional, deixando a estilização em segundo plano, como você pode perceber.
 Quanto mais eu me aprofundo nessa linguagem, mais fascinante ela se torna!
